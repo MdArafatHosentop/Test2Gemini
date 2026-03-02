@@ -1,92 +1,300 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Md Arafat Hosen</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .sidebar-link:hover { background: rgba(99, 102, 241, 0.1); border-left: 4px solid #6366f1; }
-        .card-gradient { background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); }
-    </style>
+<title>Admin Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Quill Rich Text Editor -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color:white;
+  display:flex;
+}
+
+/* Sidebar */
+.sidebar{
+  width:250px;
+  height:100vh;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(20px);
+  padding:25px;
+  position:fixed;
+  transition:0.3s;
+  border-right:1px solid rgba(255,255,255,0.1);
+}
+
+.logo{
+  font-size:24px;
+  font-weight:bold;
+  margin-bottom:50px;
+  letter-spacing:1px;
+  color:#00e676;
+}
+
+.nav a{
+  display:block;
+  padding:14px 12px;
+  margin-bottom:12px;
+  text-decoration:none;
+  color:#ccc;
+  font-weight:500;
+  border-radius:12px;
+  transition:0.3s;
+}
+
+.nav a:hover{
+  background:#00c6ff;
+  color:#111;
+  transform:translateX(5px);
+}
+
+/* Main Content */
+.main{
+  margin-left:250px;
+  padding:30px;
+  width:100%;
+  transition:0.3s;
+}
+
+/* Topbar */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
+}
+
+.topbar h2{
+  font-weight:600;
+  color:#00e676;
+}
+
+.logout-btn{
+  background:#ff5252;
+  border:none;
+  padding:8px 18px;
+  color:white;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:500;
+  transition:0.3s;
+}
+
+.logout-btn:hover{
+  background:#ff1744;
+  transform:scale(1.05);
+}
+
+/* Stats Cards */
+.cards{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  margin-bottom:40px;
+}
+
+.card{
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(15px);
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.35);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform: translateY(-5px);
+}
+
+.card h3{
+  font-size:18px;
+  margin-bottom:12px;
+  color:#00e676;
+}
+
+.card p{
+  font-size:28px;
+  font-weight:bold;
+  color:white;
+}
+
+/* Form Box */
+.form-box{
+  background: rgba(255,255,255,0.08);
+  padding:30px;
+  border-radius:20px;
+  backdrop-filter: blur(15px);
+  margin-bottom:40px;
+}
+
+.form-box h3{
+  margin-bottom:20px;
+  color:#00e676;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin-bottom:15px;
+  border-radius:12px;
+  border:none;
+  background:#1f1f1f;
+  color:white;
+  font-size:16px;
+}
+
+/* Publish Button */
+button.publish{
+  background:#00e676;
+  border:none;
+  padding:14px 25px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:16px;
+  transition:0.3s;
+}
+
+button.publish:hover{
+  background:#00c853;
+  transform:scale(1.05);
+}
+
+/* Quill Editor */
+#editor{
+  background:white;
+  color:black;
+  height:280px;
+  border-radius:12px;
+  margin-bottom:15px;
+  padding:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.25);
+}
+
+/* Quill Toolbar */
+.ql-toolbar.ql-snow{
+  border-radius:12px 12px 0 0;
+  background:#f3f3f3;
+}
+
+/* Post List */
+.post-list{
+  margin-top:30px;
+}
+
+.post-item{
+  background: rgba(255,255,255,0.08);
+  padding:18px 20px;
+  border-radius:15px;
+  margin-bottom:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 6px 18px rgba(0,0,0,0.3);
+  transition:0.3s;
+}
+
+.post-item:hover{
+  transform:translateY(-3px);
+}
+
+.post-item h4{
+  color:#00e676;
+  font-size:18px;
+}
+
+.delete-btn{
+  background:#ff5252;
+  border:none;
+  padding:8px 14px;
+  border-radius:10px;
+  color:white;
+  cursor:pointer;
+  font-weight:500;
+  transition:0.3s;
+}
+
+.delete-btn:hover{
+  background:#ff1744;
+  transform:scale(1.05);
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .sidebar{
+    display:none;
+  }
+  .main{
+    margin-left:0;
+    padding:20px;
+  }
+}
+</style>
 </head>
-<body class="bg-gray-50 font-sans leading-normal tracking-normal">
 
-    <div class="flex flex-col md:flex-row min-h-screen">
-        <aside class="w-full md:w-64 bg-slate-900 text-gray-100 flex-shrink-0">
-            <div class="p-6 text-center border-b border-gray-800">
-                <span class="text-xl font-bold tracking-wider text-indigo-400">ADMIN PANEL</span>
-            </div>
-            <nav class="mt-6">
-                <a href="#" class="sidebar-link block py-3 px-6 text-gray-300 transition duration-200 bg-slate-800 text-indigo-400">
-                    <i class="fas fa-plus-circle mr-3"></i> নতুন পোস্ট
-                </a>
-                <a href="#" class="sidebar-link block py-3 px-6 text-gray-300 transition duration-200">
-                    <i class="fas fa-layer-group mr-3"></i> সব পোস্ট
-                </a>
-                <a href="#" class="sidebar-link block py-3 px-6 text-gray-300 transition duration-200">
-                    <i class="fas fa-cog mr-3"></i> সেটিংস
-                </a>
-                <button id="logoutBtn" class="w-full text-left py-3 px-6 text-red-400 hover:bg-red-900/20 transition mt-20">
-                    <i class="fas fa-sign-out-alt mr-3"></i> লগআউট
-                </button>
-            </nav>
-        </aside>
+<body>
 
-        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
-            <div class="container mx-auto">
-                <div class="flex justify-between items-center mb-8">
-                    <h1 class="text-3xl font-bold text-gray-800">ব্লগ পাবলিশার</h1>
-                    <div class="flex items-center space-x-4">
-                        <span class="text-sm text-gray-500">স্বাগতম, Md Arafat</span>
-                        <img src="https://ui-avatars.com/api/?name=Md+Arafat&background=6366f1&color=fff" class="w-10 h-10 rounded-full border-2 border-white shadow-sm">
-                    </div>
-                </div>
+<div class="sidebar">
+  <div class="logo">Admin Panel</div>
+  <div class="nav">
+    <a href="#">Dashboard</a>
+    <a href="#">Create Post</a>
+    <a href="#">All Posts</a>
+  </div>
+</div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-center">
-                        <div class="p-4 bg-indigo-50 rounded-xl mr-4"><i class="fas fa-file-alt text-indigo-600"></i></div>
-                        <div><p class="text-sm text-gray-500">মোট পোস্ট</p><p class="text-xl font-bold">১২</p></div>
-                    </div>
-                </div>
+<div class="main">
 
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                    <div class="p-6 border-b border-gray-100 flex justify-between items-center">
-                        <h3 class="text-lg font-semibold text-gray-700">কন্টেন্ট এডিটর</h3>
-                        <span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">অটো-সেভ অন</span>
-                    </div>
-                    
-                    <div class="p-8 space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-2">
-                                <label class="text-sm font-semibold text-gray-600">পোস্ট টাইটেল</label>
-                                <input type="text" id="postTitle" placeholder="টাইটেল এখানে লিখুন..." class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition">
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-sm font-semibold text-gray-600">ইউআরএল স্লাগ (Slug)</label>
-                                <div class="flex">
-                                    <span class="p-3 bg-gray-200 text-gray-500 rounded-l-xl border border-r-0 border-gray-200 text-sm">/posts/</span>
-                                    <input type="text" id="postSlug" placeholder="post1" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-r-xl focus:ring-2 focus:ring-indigo-500 outline-none transition">
-                                </div>
-                            </div>
-                        </div>
+  <div class="topbar">
+    <h2>Dashboard Overview</h2>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
 
-                        <div class="space-y-2">
-                            <label class="text-sm font-semibold text-gray-600">ব্লগ কন্টেন্ট (HTML সমর্থিত)</label>
-                            <textarea id="postContent" rows="10" placeholder="আপনার ব্লগের বিস্তারিত লিখুন..." class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition"></textarea>
-                        </div>
-
-                        <div class="flex justify-end pt-4">
-                            <button id="publishBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-10 rounded-xl shadow-lg shadow-indigo-200 transition transform active:scale-95">
-                                <i class="fas fa-paper-plane mr-2"></i> পাবলিশ করুন
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+  <!-- Stats Cards -->
+  <div class="cards">
+    <div class="card">
+      <h3>Total Posts</h3>
+      <p id="totalPosts">0</p>
     </div>
+    <div class="card">
+      <h3>Visitors</h3>
+      <p>--</p>
+    </div>
+    <div class="card">
+      <h3>Comments</h3>
+      <p>--</p>
+    </div>
+  </div>
 
-    </body>
+  <!-- Create Post Form -->
+  <div class="form-box">
+    <h3>Create New Post</h3>
+    <input type="text" id="title" placeholder="Post Title">
+    <input type="text" id="image" placeholder="Image URL">
+    <div id="editor"></div>
+    <button class="publish" onclick="publish()">Publish Post</button>
+  </div>
+
+  <!-- Post List -->
+  <div class="post-list" id="posts"></div>
+
+</div>
+
+<!-- Quill JS -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+var quill = new Quill('#editor', { theme: 'snow' });
+</script>
+
+</body>
 </html>
