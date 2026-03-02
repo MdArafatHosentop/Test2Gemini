@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background: radial-gradient(circle at top left, #1e293b, #0f172a); }
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+    <div class="glass p-10 rounded-2xl shadow-2xl w-full max-w-md transform transition-all hover:scale-105">
+        <div class="text-center mb-8">
+            <div class="bg-indigo-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-500/50">
+                <i class="fas fa-user-shield text-2xl text-white"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-white tracking-tight">অ্যাডমিন লগইন</h2>
+            <p class="text-gray-400 mt-2">Md Arafat Hosen's Blog</p>
+        </div>
+
+        <form id="loginForm" class="space-y-6">
+            <div class="relative">
+                <i class="fas fa-envelope absolute left-4 top-4 text-gray-500"></i>
+                <input type="email" id="email" placeholder="ইমেইল এড্রেস" class="w-full bg-gray-800/50 border border-gray-700 text-white pl-12 p-3.5 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all">
+            </div>
+            
+            <div class="relative">
+                <i class="fas fa-lock absolute left-4 top-4 text-gray-500"></i>
+                <input type="password" id="password" placeholder="পাসওয়ার্ড" class="w-full bg-gray-800/50 border border-gray-700 text-white pl-12 p-3.5 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all">
+            </div>
+
+            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-indigo-500/30 transition-all duration-300 transform active:scale-95">
+                লগইন করুন <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </form>
+    </div>
+
+    </body>
+</html>
